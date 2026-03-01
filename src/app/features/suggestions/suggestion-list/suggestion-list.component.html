@@ -1,0 +1,61 @@
+<div class="list-container">
+  <div class="list-header">
+    <div>
+      <h1 class="list-title">Suggestions</h1>
+      <p class="list-subtitle">{{ filteredSuggestions.length }} suggestion{{ filteredSuggestions.length !== 1 ? 's' : '' }}</p>
+    </div>
+    <button class="add-btn" (click)="addSuggestion()">+ Ajouter suggestion</button>
+  </div>
+
+  <!-- Filtres -->
+  <div class="filters">
+    <button
+      *ngFor="let f of filters"
+      class="filter-btn"
+      [class.active]="activeFilter === f.key"
+      (click)="setFilter(f.key)">
+      {{ f.label }}
+    </button>
+  </div>
+
+  <!-- Liste des suggestions -->
+  <div class="suggestions-grid">
+    <div class="suggestion-card" *ngFor="let suggestion of filteredSuggestions">
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="category-badge">{{ suggestion.category }}</span>
+          <span class="status-badge" [ngClass]="getStatusClass(suggestion.status)">
+            {{ getStatusLabel(suggestion.status) }}
+          </span>
+        </div>
+        <div class="votes-badge">
+          <span class="votes-icon">▲</span>
+          <span class="votes-count">{{ suggestion.votes }}</span>
+        </div>
+      </div>
+
+      <h3 class="card-title">{{ suggestion.title }}</h3>
+      <p class="card-description">{{ suggestion.description | slice:0:110 }}...</p>
+
+      <div class="card-footer">
+        <div class="author-info">
+          <div class="author-avatar">{{ suggestion.author.charAt(0) }}</div>
+          <div>
+            <span class="author-name">{{ suggestion.author }}</span>
+            <span class="suggestion-date">{{ suggestion.date | date:'dd MMM yyyy' }}</span>
+          </div>
+        </div>
+
+        <!-- Partie2 - Section 3a : bouton Details -->
+        <button class="details-btn" (click)="viewDetails(suggestion.id)">
+          Détails →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredSuggestions.length === 0">
+    <span class="empty-icon">🔍</span>
+    <p>Aucune suggestion trouvée pour ce filtre.</p>
+  </div>
+</div>

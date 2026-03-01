@@ -1,0 +1,33 @@
+<header class="navbar">
+  <div class="navbar-inner">
+    <a routerLink="/home" class="navbar-brand">
+      <span class="brand-icon">✦</span>
+      <span class="brand-text">SuggestApp</span>
+    </a>
+
+    <nav class="navbar-nav">
+      <a routerLink="/home"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-link">
+        Home
+      </a>
+      <a routerLink="/suggestions"
+         routerLinkActive="active"
+         class="nav-link">
+        Suggestions
+      </a>
+      <a routerLink="/users"
+         routerLinkActive="active"
+         class="nav-link">
+        Utilisateurs
+      </a>
+    </nav>
+
+    <div class="navbar-actions">
+      <a routerLink="/suggestions" class="nav-cta">
+        Nouvelle idée +
+      </a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,91 @@
+<div class="detail-container">
+
+  <!-- Cas : suggestion non trouvée -->
+  <div class="not-found" *ngIf="!suggestion">
+    <span class="nf-icon">🔍</span>
+    <h2>Suggestion introuvable</h2>
+    <p>La suggestion avec l'id <strong>#{{ id }}</strong> n'existe pas.</p>
+    <button class="back-btn" (click)="backToList()">← Retour à la liste</button>
+  </div>
+
+  <!-- Cas : suggestion trouvée -->
+  <ng-container *ngIf="suggestion">
+    <!-- Navigation breadcrumb + back link (Partie2 - Section 3b) -->
+    <div class="breadcrumb">
+      <button class="back-link" (click)="backToList()">
+        ← Back to list
+      </button>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">Suggestion #{{ suggestion.id }}</span>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="header-badges">
+          <span class="category-badge">{{ suggestion.category }}</span>
+          <span class="status-badge" [ngClass]="getStatusClass(suggestion.status)">
+            {{ getStatusLabel(suggestion.status) }}
+          </span>
+        </div>
+
+        <div class="votes-display">
+          <span class="votes-arrow">▲</span>
+          <span class="votes-number">{{ suggestion.votes }}</span>
+          <span class="votes-label">votes</span>
+        </div>
+      </div>
+
+      <h1 class="detail-title">{{ suggestion.title }}</h1>
+
+      <div class="author-row">
+        <div class="author-avatar">{{ suggestion.author.charAt(0) }}</div>
+        <div>
+          <span class="author-name">{{ suggestion.author }}</span>
+          <span class="author-date">Soumis le {{ suggestion.date | date:'dd MMMM yyyy' }}</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="detail-section">
+        <h3 class="section-title">Description</h3>
+        <p class="detail-description">{{ suggestion.description }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3 class="section-title">Informations</h3>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Identifiant</span>
+            <span class="info-value">#{{ suggestion.id }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Catégorie</span>
+            <span class="info-value">{{ suggestion.category }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Statut</span>
+            <span class="info-value status-inline" [ngClass]="getStatusClass(suggestion.status)">
+              {{ getStatusLabel(suggestion.status) }}
+            </span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Votes</span>
+            <span class="info-value accent-text">{{ suggestion.votes }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <!-- Partie2 - Section 3b : lien back to list -->
+        <button class="btn-back" (click)="backToList()">
+          ← Retour à la liste
+        </button>
+        <button class="btn-vote">
+          ▲ Voter pour cette suggestion
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

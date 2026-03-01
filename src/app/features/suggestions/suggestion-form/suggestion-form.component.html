@@ -1,0 +1,121 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <h1 class="form-title">Nouvelle Suggestion</h1>
+      <p class="form-subtitle">Proposez une amélioration à la communauté</p>
+    </div>
+
+    <form [formGroup]="suggestionForm" (ngSubmit)="onSubmit()">
+
+      <!-- Titre -->
+      <div class="form-group">
+        <label for="title" class="form-label">Titre <span class="required">*</span></label>
+        <input
+          id="title"
+          type="text"
+          class="form-control"
+          [class.invalid]="title?.invalid && title?.touched"
+          formControlName="title"
+          placeholder="Ex: Ajout du mode sombre"
+        />
+        <div class="error-messages" *ngIf="title?.touched && title?.invalid">
+          <span *ngIf="title?.errors?.['required']">Le titre est obligatoire.</span>
+          <span *ngIf="title?.errors?.['minlength']">Le titre doit contenir au minimum 5 caractères.</span>
+          <span *ngIf="title?.errors?.['pattern']">
+            Le titre ne doit contenir que des lettres et commencer par une majuscule.
+          </span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description" class="form-label">Description <span class="required">*</span></label>
+        <textarea
+          id="description"
+          class="form-control"
+          [class.invalid]="description?.invalid && description?.touched"
+          formControlName="description"
+          rows="5"
+          placeholder="Décrivez votre suggestion en détail (min. 30 caractères)..."
+        ></textarea>
+        <div class="error-messages" *ngIf="description?.touched && description?.invalid">
+          <span *ngIf="description?.errors?.['required']">La description est obligatoire.</span>
+          <span *ngIf="description?.errors?.['minlength']">La description doit contenir au minimum 30 caractères.</span>
+        </div>
+      </div>
+
+      <!-- Catégorie -->
+      <div class="form-group">
+        <label for="category" class="form-label">Catégorie <span class="required">*</span></label>
+        <select
+          id="category"
+          class="form-control"
+          [class.invalid]="category?.invalid && category?.touched"
+          formControlName="category"
+        >
+          <option value="">-- Sélectionner une catégorie --</option>
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <div class="error-messages" *ngIf="category?.touched && category?.invalid">
+          <span *ngIf="category?.errors?.['required']">La catégorie est obligatoire.</span>
+        </div>
+      </div>
+
+      <!-- Auteur -->
+      <div class="form-group">
+        <label for="author" class="form-label">Auteur</label>
+        <input
+          id="author"
+          type="text"
+          class="form-control"
+          formControlName="author"
+          placeholder="Votre nom (optionnel)"
+        />
+      </div>
+
+      <!-- Date (readonly) -->
+      <div class="form-group">
+        <label for="date" class="form-label">Date</label>
+        <input
+          id="date"
+          type="text"
+          class="form-control readonly"
+          formControlName="date"
+          readonly
+        />
+      </div>
+
+      <!-- Status (readonly) -->
+      <div class="form-group">
+        <label for="status" class="form-label">Statut</label>
+        <input
+          id="status"
+          type="text"
+          class="form-control readonly"
+          formControlName="status"
+          readonly
+        />
+      </div>
+
+      <!-- Boutons -->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          
+          routerLink="/suggestions"
+        >
+          Annuler
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="suggestionForm.invalid"
+        >
+          Soumettre
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

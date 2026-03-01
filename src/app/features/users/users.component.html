@@ -1,0 +1,22 @@
+<div class="users-container">
+  <div class="users-header">
+    <h1>Utilisateurs</h1>
+    <p class="subtitle">{{ users.length }} membres enregistrés</p>
+  </div>
+
+  <div class="users-grid">
+    <div class="user-card" *ngFor="let user of users">
+      <div class="user-avatar">{{ user.name.charAt(0) }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-email">{{ user.email }}</span>
+      </div>
+      <div class="user-meta">
+        <span class="role-badge" [ngClass]="'role-' + user.role.toLowerCase()">
+          {{ user.role }}
+        </span>
+        <span class="user-suggestions">{{ user.suggestions }} suggestions</span>
+      </div>
+    </div>
+  </div>
+</div>
