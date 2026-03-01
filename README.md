@@ -1,4 +1,4 @@
-# Workshop n°3 — Routage & Lazy Loading · Solution complète
+# Workshop n°4 — Routage & Lazy Loading · Solution complète
 
 > Solution Angular pour l'implémentation d'un système de navigation (Partie 1 : Routage simple + Partie 2 : Lazy Loading).
 
